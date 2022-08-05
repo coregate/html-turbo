@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>1-js-eval-timing</title>
+</head>
+<body>
+  <h1>1-js-eval-timing</h1>
+  <div id="js"></div>
+  <script type="application/javascript">
+    // 动态加载JS文件
+    let s1 = document.createElement("script");
+    s1.id = 's1'
+    s1.src = './1.js';
+    document.body.appendChild(s1);
+
+    // 动态加载JS文本
+    let s2 = document.createElement("script");
+    s2.id = 's2'
+    s2.innerHTML = `console.log('This will be evaluated TOO.')`
+    document.body.appendChild(s2);
+
+    // 不能重复加载同一个element对象
+    // WON'T add another same script object
+    document.body.appendChild(s1);
+    // WON'T add another same script object
+    document.getElementById('js').appendChild(s1)
+    // WON'T work
+    s1.remove()
+    document.body.appendChild(s1)
+    // WON'T work
+    document.getElementById('s2').remove() // or s2.remove()
+    s2.innerHTML = `console.log('This will NOT be evaluated AGAIN.')`
+    let s3 = s2 // 实际引用了同一个object
+    s3.id = 's3'
+    document.body.appendChild(s3);
+
+    // 能重复加载同一个JS文件
+    // This works
+    let s4 = document.createElement("script");
+    s4.id = 's4'
+    s4.src = './1.js';
+    // document.body.appendChild(s4);
+
+    // 使用Element.replaceWith
+    // This works
+    let s5 = document.createElement("script");
+    s5.id = 's5'
+    s5.innerHTML = `console.log('HELLO')`
+    s2.replaceWith(s5)
+
+    // 直接插入innerHtml
+    // WON'T work
+    var wrap = document.createElement("div");
+    wrap.innerHTML = '<script type="text/javascript" src="./2.js"><'+'/script>';
+    var wrapscript = wrap.childNodes[0];
+    document.body.appendChild(wrapscript)
+  </script>
+</body>
+</html>

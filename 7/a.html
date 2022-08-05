@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Use Stimulus</title>
+    <!-- <script type="module" src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"></script> -->
+    <script type="module">
+      import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+      window.Stimulus = Application.start()
+      window.app = new Object()
+      window.app.Controller = Controller
+    </script>
+  </head>
+  <body>
+    <div data-controller="hello">
+      <input data-hello-target="name" type="text">
+    
+      <button data-action="click->hello#greet">
+        Greet
+      </button>
+    
+      <span data-hello-target="output">
+      </span>
+    </div>
+    <script>
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      const loadController = async(delayMs) => {
+        // 等待stimulus加载完成
+        while(typeof Stimulus == 'undefined') {
+          console.log('wait')
+          await delay(delayMs)
+        }
+        console.log(Stimulus)
+        Stimulus.register("hello", class extends window.app.Controller {
+          static targets = [ "name", "output" ]
+
+          greet() {
+            this.outputTarget.textContent =
+              `Hello, ${this.nameTarget.value}!`
+          }
+
+          connect() {
+            console.log('do sth when the controller connected')
+          }
+        })
+      }
+      loadController(100)
+    </script>
+  </body>
+</html>

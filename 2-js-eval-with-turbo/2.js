@@ -1,0 +1,1 @@
+console.log('Loaded by some innerHtml')

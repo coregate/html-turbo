@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2D-js-eval-with-turbo</title>
+  <!-- <script src="../dist/turbo.es2017-esm.js" type="module"></script> -->
+</head>
+<body>
+  <h1>重复添加eventListener</h1>
+  <p><a href="./a.html">To A</a></p>
+  <script type="application/javascript" data-turbo-eval="false">
+    // 添加的listener会一直存在(执行)
+    // 每次回到本页面的时候，还会被重复添加 **两次**
+    // 浏览器添加一次
+    // Turbo 调用eval() 一次（data-turbo-eval="true"）
+    window.c = 0;
+    document.addEventListener("turbo:load", function() {
+      console.log('Turbo laoded in page:', document.title, ++c)
+    }, {once : true})
+  </script>
+  <!-- <script data-turbo-eval="true">
+    // 这个只存在在本页面中，但是会被执行两次：浏览器一次 Turbo 调用eval() 一次
+    console.log('Hello ONLY from:', document.title)
+  </script> -->
+  <script src="./3.js" data-turbo-eval="false"></script>
+</body>
+</html>

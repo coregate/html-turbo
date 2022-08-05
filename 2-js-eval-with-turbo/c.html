@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2C-js-eval-timing</title>
+</head>
+<body>
+  <h1>2C-js-eval-timing</h1>
+  <a href="./a.html">back to A</a>
+  <script type="application/javascript" data-turbo-eval="false">
+    if(typeof s1 == 'undefined') {
+      let s1 = document.createElement("script");
+      s1.id = 's1'
+      s1.src = './1.js';
+      document.body.appendChild(s1);
+    }
+
+    if (typeof s2 == 'undefined') {
+      let s2 = document.createElement("script");
+      s2.id = 's2'
+      s2.innerHTML = `console.log('This will be evaluated TOO.')`
+      document.body.appendChild(s2);
+    }
+  </script>
+</body>
+</html>

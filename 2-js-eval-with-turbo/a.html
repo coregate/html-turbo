@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2-js-eval-with-turbo</title>
+  <script src="../dist/turbo.es2017-esm.js" type="module"></script>
+  <script >
+    document.addEventListener('turbo:visit', (event)=>{
+      console.log(event.detail.url, event.detail.action)
+    }, {once : false})
+    document.addEventListener('turbo:before-cache', (e)=>console.log(e))
+    document.addEventListener('turbo:before-render', (e)=>console.log(e.detail))
+  </script>
+</head>
+<body>
+  <h1>2-js-eval-with-turbo</h1>
+  <p><a href="./b.html">To B</a></p>
+  <p><a href="./c.html">To C</a></p>
+  <p><a href="./d.html">To D</a></p>
+</body>
+</html>

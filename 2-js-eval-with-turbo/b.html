@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>2B-js-eval-timing</title>
+  <script src="./2.js"></script>
+</head>
+<body>
+  <h1>2B-js-eval-timing</h1>
+  <p><a href="./a.html">back to A</a></p>
+  <a href="./c.html">To C</a>
+  <script type="application/javascript">
+    // 动态加载JS文件
+    let s1 = document.createElement("script");
+    s1.id = 's1'
+    s1.src = './1.js';
+    document.body.appendChild(s1);
+
+    // 动态加载JS文本
+    let s2 = document.createElement("script");
+    s2.id = 's2'
+    s2.innerHTML = `console.log('This will be evaluated TOO.')`
+    document.body.appendChild(s2);
+
+    // 不能重复加载同一个element对象
+    // WON'T add another same script object
+    document.body.appendChild(s1);
+    // WON'T add another same script object
+    document.head.appendChild(s1)
+    // WON'T work
+    s1.remove()
+    document.body.appendChild(s1)
+    // WON'T work
+    document.getElementById('s2').remove() // or s2.remove()
+    s2.innerHTML = `console.log('This will NOT be evaluated AGAIN.')`
+    let s3 = s2 // 实际引用了同一个object
+    s3.id = 's3'
+    document.body.appendChild(s3);
+
+    // 能重复加载同一个JS文件
+    // This works
+    let s4 = document.createElement("script");
+    s4.id = 's4'
+    s4.src = './1.js';
+    document.body.appendChild(s4);
+  </script>
+</body>
+</html>
