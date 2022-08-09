@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>frame：b.html</title>
+  </head>
+  <body>
+    <p>这段在frame之外的文字不会被其他页面显示。</p>
+    <h3>Frame是通过ID来进行匹配和替换的。</h3>
+    <turbo-frame id="b.html">
+      <p> 这段文字来自frame：b.html。同时会使用css改变背景色和文字颜色。</p>
+      <p><a href="./b2.html">点击这里更新文字</a></p>
+      <style>
+        body{
+          background-color: cornflowerblue;
+        }
+      </style>
+      <link rel="stylesheet" href="./1.css">
+      <script src="./1.js" data-turbo-eval="true"></script>
+      <script>console.log('Hey from a script tag.')</script>
+    </turbo-frame>
+    <turbo-frame id="b.html">
+      <p>另一个相同ID的frame会被忽略</p>
+    </turbo-frame>
+  </body>
+</html>

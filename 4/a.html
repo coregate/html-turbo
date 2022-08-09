@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>landing page</title>
+    <script src="../dist/turbo.es2017-esm.js" type="module"></script>
+    <style>
+      body{
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>加载一个Turbo Frame：</h3>
+    <turbo-frame id="b.html" src="//127.0.0.1:5500/4/b.html"></turbo-frame>
+    <turbo-frame id="b.html" src="127.0.0.1:5500/4/b.html">
+      <p>本frame的src没有使用full path的URL，因此src地址不正确（404）</p>
+    </turbo-frame>
+    <turbo-frame id="b1.html">
+      <p>下面的link会跳到新的页面，而不是改变本frame的内容：</p>
+      <h3><a href="//127.0.0.1:5500/4/b1.html" data-turbo-frame="_self">Click here to load a CROS frame</a></h3>
+    </turbo-frame>
+    <turbo-frame>
+      <p>下面的link会跳到新的页面，而不是改变上一个frame的内容：</p>
+      <h3><a href="//127.0.0.1:5500/4/b1.html" data-turbo-frame="b1.html">Click here to load a CROS frame</a></h3>
+    </turbo-frame>
+    <p><a href="./c.html">To C</a></p>
+  </body>
+</html>

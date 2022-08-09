@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>landing page</title>
+    <script src="../dist/turbo.es2017-esm.js" type="module"></script>
+    <style>
+      body{
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <p>加载一个Turbo Frame：</p>
+    <turbo-frame id="b.html" src="./b.html"></turbo-frame>
+    <turbo-frame id="b.html" src="./bb.html"></turbo-frame>
+    <turbo-frame id="b.html" src="./bb.html"></turbo-frame>
+    <turbo-frame id="b.html" src="./bb.html"></turbo-frame>
+    <turbo-frame id="b1.html" src="./b1.html"></turbo-frame>
+    <turbo-frame id="b3.html">
+      <form action="./b3.html" data-turbo-frame="随便填的，说明见readme第三条">  
+        <p><input type="submit" value="Delete this message">
+        (with a confirmation shown in a specific frame)</p>
+      </form>
+    </turbo-frame>
+    <p><a href="./c.html">To C</a></p>
+  </body>
+</html>
